@@ -10,7 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: get TAG
-        run: echo ${{ github.event.client_payload.tag}}
+        run: |
+          echo ${{ github.event.client_payload.tag}}
+          echo cat "version = '${{ github.event.client_payload.tag}}'" > version.py 
 
 # crea documentazione
   documentation:
