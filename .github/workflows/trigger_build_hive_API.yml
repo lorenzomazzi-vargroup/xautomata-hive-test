@@ -9,7 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: echo "${{ github.event.client_payload.tag}}"
+      - name: get TAG
+        run: | 
+          TAG_NAME = ${{ github.event.client_payload.tag}}
+          echo "New TAG has been created. New tag is: $TAG_NAME"
 
 # crea documentazione
   documentation:
