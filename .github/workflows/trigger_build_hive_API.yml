@@ -10,9 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: get TAG
-        run: | 
-          TAG_NAME = ${{ github.event.client_payload.tag}}
-          echo "New TAG has been created. New tag is: $TAG_NAME"
+        run: echo ${{ github.event.client_payload.tag}}
 
 # crea documentazione
   documentation:
