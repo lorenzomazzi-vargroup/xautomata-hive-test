@@ -9,9 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.client_payload.ref }}
-      - run: echo ${{ github.event.client_payload.sha }} > version-check.txt
+      - run: echo ${{ github.event.client_payload.tag}} > version-check.txt
 
 # crea documentazione
   documentation:
