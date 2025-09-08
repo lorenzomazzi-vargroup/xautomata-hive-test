@@ -14,8 +14,17 @@ jobs:
       - uses: actions/checkout@v3
       - name: get TAG
         run: |
-          echo ${{ github.event.client_payload.tag}}
+          echo "New TAG: ${{ github.event.client_payload.tag}}"
           echo cat "version = '${{ github.event.client_payload.tag}}'" > version.py 
+          
+  #creiamo il nuovo tag dandogli il valore della version 
+      - name: Create new tag
+        id: create_new_tag
+        if: ${{ steps.version_changed.outputs.VERSION_CHANGED == 'true' }}
+        run: |
+            TAG_NAME=${{ github.event.client_payload.tag }}
+            git tag $TAG_NAME
+            git push origin $TAG_NAME
 
 # crea documentazione
   documentation:
