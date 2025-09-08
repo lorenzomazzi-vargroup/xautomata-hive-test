@@ -6,6 +6,7 @@ on:
 
 
 # otteniamo il nuovo tag di API ENV
+# scriviamo su version.py la nuova versione
 jobs:
   new-api-tag-generated:
     runs-on: ubuntu-latest
