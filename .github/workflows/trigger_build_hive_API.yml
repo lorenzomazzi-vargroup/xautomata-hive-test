@@ -4,6 +4,8 @@ on:
   repository_dispatch:
     types: [new-tag]
 
+
+# otteniamo il nuovo tag di API ENV
 jobs:
   new-api-tag-generated:
     runs-on: ubuntu-latest
