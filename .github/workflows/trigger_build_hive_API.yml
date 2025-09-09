@@ -83,3 +83,10 @@ jobs:
           TAG_NAME=${{ github.event.client_payload.tag }}
           echo "version = '$TAG_NAME'" > "version.py"
 
+
+
+      - name: Update txt file version
+        run: |
+          TAG_NAME=${{ github.event.client_payload.tag }}
+          echo "version = '$TAG_NAME'" > "version.txt"
+
