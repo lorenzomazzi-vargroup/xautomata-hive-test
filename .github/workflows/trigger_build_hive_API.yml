@@ -5,13 +5,13 @@ on:
     types: [new-tag]
 
 
-# otteniamo il nuovo tag di API ENV
-# scriviamo su version.py la nuova versione
 jobs:
   new-api-tag-generated:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      # otteniamo il payload inviato da API ENV
       - name: get new TAG
         id: get_payload
         run: |
@@ -19,36 +19,63 @@ jobs:
           echo "Payload received."
           echo "TAG: $PAYLOAD"
 
+      #otteniamo ultimo tag nella repo
+      - name: Get current tag
+        id: get_current_tag
+        run: echo "TAG=$(git describe --abbrev=0)" >> $GITHUB_OUTPUT
 
+
+      #leggiamo la versione scritta sul file
       - name: Read version from file
         id: get_version
-        # ricordarsi di modificare il percorso del file
         run: echo "VERSION=$(cat hive/version.py | grep -oP "(?<=version = ')[^']*")" >> $GITHUB_OUTPUT
     
 
+      #confrontiamo la version scritta sul file col payload
+      #se il payload ha un valore diverso dal tag attuale allora va bene usarlo come confronto
+      #se il payload ha lo stesso valore del tag, allora usare PAYLOAD o CURRENT_TAG non cambia
       - name: Check if version has changed
-        id: version_changed
+        id: version_changed 
         run: |
           PAYLOAD=${{ steps.get_payload.outputs.PAYLOAD }}
+          CURRENT_TAG=${{steps.get_current_tag.outputs.VERSION}}
           CURRENT_VERSION=${{ steps.get_version.outputs.VERSION }}
-          if [ "$PAYLOAD" != "$CURRENT_VERSION" ]; then
-            echo "Version has changed. New version is $CURRENT_VERSION"
+
+          if [ "$PAYLOAD" != "$CURRENT_TAG" ]; then
+            echo "TAG has changed. New tag is $PAYLOAD"
+            echo "TAG_CHANGED=true" >> $GITHUB_OUTPUT
+            CURRENT_TAG = $PAYLOAD
+          else
+            echo "TAG has not changed."
+            echo "TAG_CHANGED=false" >> $GITHUB_OUTPUT
+          fi
+
+          
+          if [ "$CURRENT_TAG" != "$CURRENT_VERSION" ]; then
+            echo "Version has changed. New version is $PAYLOAD"
             echo "VERSION_CHANGED=true" >> $GITHUB_OUTPUT
           else
             echo "Version has not changed."
             echo "VERSION_CHANGED=false" >> $GITHUB_OUTPUT
           fi
   
-          
-  #creiamo il nuovo tag dandogli il valore ricevuto
+
+  #se il tag è diverso creiamo il nuovo tag dandogli il valore ricevuto
       - name: Create new tag
         id: create_new_tag
-        if: ${{ steps.version_changed.outputs.VERSION_CHANGED == 'true' }}
+        if: ${{ steps.version_changed.outputs.TAG_CHANGED == 'true' }}
         run: |
             TAG_NAME=${{ github.event.client_payload.tag }}
             git tag $TAG_NAME
             git push origin $TAG_NAME
-            echo cat "version = '${{ github.event.client_payload.tag}}'" > version.py 
+
+  #scriviamo la nuova versione nel file
+      - name: Update file version
+        id: update_file_version
+        if: ${{steps.version_changed.outputs.VERSION_CHANGED == 'true'}}
+        run: |
+          TAG_NAME=${{ github.event.client_payload.tag }}
+          echo cat "version = $TAG_NAME > version.py 
 
 # crea documentazione
   documentation:
