@@ -12,12 +12,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: get TAG
+      - name: get new TAG
+        id: get_payload
         run: |
-          echo "New TAG: ${{ github.event.client_payload.tag}}"
-          echo cat "version = '${{ github.event.client_payload.tag}}'" > version.py 
+          echo "PAYLOAD=${{github.event.client_payload.tag}}" >> $GITHUB_OUTPUT
+          echo "Payload received."
+          echo "TAG: $PAYLOAD"
+
+
+      - name: Read version from file
+        id: get_version
+        # ricordarsi di modificare il percorso del file
+        run: echo "VERSION=$(cat hive/version.py | grep -oP "(?<=version = ')[^']*")" >> $GITHUB_OUTPUT
+    
+
+      - name: Check if version has changed
+        id: version_changed
+        run: |
+          PAYLOAD=${{ steps.get_payload.outputs.PAYLOAD }}
+          CURRENT_VERSION=${{ steps.get_version.outputs.VERSION }}
+          if [ "$PAYLOAD" != "$CURRENT_VERSION" ]; then
+            echo "Version has changed. New version is $CURRENT_VERSION"
+            echo "VERSION_CHANGED=true" >> $GITHUB_OUTPUT
+          else
+            echo "Version has not changed."
+            echo "VERSION_CHANGED=false" >> $GITHUB_OUTPUT
+          fi
+  
           
-  #creiamo il nuovo tag dandogli il valore della version 
+  #creiamo il nuovo tag dandogli il valore ricevuto
       - name: Create new tag
         id: create_new_tag
         if: ${{ steps.version_changed.outputs.VERSION_CHANGED == 'true' }}
@@ -25,6 +48,7 @@ jobs:
             TAG_NAME=${{ github.event.client_payload.tag }}
             git tag $TAG_NAME
             git push origin $TAG_NAME
+            echo cat "version = '${{ github.event.client_payload.tag}}'" > version.py 
 
 # crea documentazione
   documentation:
