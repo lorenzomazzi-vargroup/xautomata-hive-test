@@ -78,8 +78,8 @@ jobs:
   #scriviamo la nuova versione nel file
       - name: Update file version
         id: update_file_version
-        if: ${{steps.version_changed.outputs.VERSION_CHANGED == 'true'}}
+        if: ${{ steps.version_changed.outputs.VERSION_CHANGED == 'true' }}
         run: |
           TAG_NAME=${{ github.event.client_payload.tag }}
-          echo cat "version = $TAG_NAME > version.py"
+          echo "version = '$TAG_NAME'" > version.py
 
