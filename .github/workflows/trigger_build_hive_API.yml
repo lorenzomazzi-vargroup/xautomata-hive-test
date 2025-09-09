@@ -24,7 +24,7 @@ jobs:
       #otteniamo ultimo tag nella repo
       - name: Get current tag
         id: get_current_tag
-        run: echo "TAG=$(git describe --abbrev=0)" >> $GITHUB_OUTPUT
+        run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
 
 
       #leggiamo la versione scritta sul file
