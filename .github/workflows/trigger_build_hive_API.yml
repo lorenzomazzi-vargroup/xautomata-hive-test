@@ -111,7 +111,7 @@ jobs:
 # questa azione si attiva solo se quella subito prima ha creato un nuovo tag con successo
   documentation:
     runs-on: ubuntu-latest
-    needs: create_tag
+    needs: create_new_tag
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
