@@ -69,7 +69,7 @@ jobs:
         run: |
             TAG_NAME=${{ github.event.client_payload.tag }}
             git tag $TAG_NAME
-            git push origin $TAG_NAME
+            git push $TAG_NAME
 
   #scriviamo la nuova versione nel file
       - name: Update file version
