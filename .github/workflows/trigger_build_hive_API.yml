@@ -37,9 +37,9 @@ jobs:
       - name: Check if version has changed
         id: version_changed 
         run: |
-          PAYLOAD=${{ steps.get_payload.outputs.PAYLOAD }}
-          CURRENT_TAG=${{steps.get_current_tag.outputs.TAG}}
-          CURRENT_VERSION=${{ steps.get_version.outputs.VERSION }}
+          PAYLOAD="${{ steps.get_payload.outputs.PAYLOAD }}"
+          CURRENT_TAG="${{ steps.get_current_tag.outputs.TAG }}"
+          CURRENT_VERSION="${{ steps.get_version.outputs.VERSION }}"
 
           if [ "$PAYLOAD" != "$CURRENT_TAG" ]; then
             echo "TAG has changed. New tag is $PAYLOAD"
