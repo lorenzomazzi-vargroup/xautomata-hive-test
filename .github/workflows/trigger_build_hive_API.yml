@@ -76,13 +76,13 @@ jobs:
             git push origin $TAG_NAME
           
   #scriviamo la nuova versione nel file
+  #eseguiamo config e commit perché altrimenti il file non viene salvato nella repo
       - name: Update file version
         id: update_file_version
         if: ${{ steps.version_changed.outputs.VERSION_CHANGED == 'true' }}
         run: |
           TAG_NAME=${{ github.event.client_payload.tag }}
           echo "tag version: '$TAG_NAME'"
-          ls -l hive/version.py
           echo "version = '$TAG_NAME'" > hive/version.py
           cat hive/version.py
 
