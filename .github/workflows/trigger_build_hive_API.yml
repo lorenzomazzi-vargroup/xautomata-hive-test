@@ -88,5 +88,5 @@ jobs:
         run: |
           TAG_NAME=${{ github.event.client_payload.tag }}
           echo "tag version: '$TAG_NAME'"
-          echo "version = '$TAG_NAME'" > version.txt
+          echo 'TI ODIO!' > version.txt
 
