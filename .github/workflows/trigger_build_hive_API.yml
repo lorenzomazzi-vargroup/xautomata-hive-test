@@ -81,7 +81,7 @@ jobs:
         if: ${{steps.version_changed.outputs.VERSION_CHANGED == 'true'}}
         run: |
           TAG_NAME=${{ github.event.client_payload.tag }}
-          echo cat "version = $TAG_NAME > version.py 
+          echo cat "version = $TAG_NAME > version.py"
 
 # crea documentazione
   documentation:
