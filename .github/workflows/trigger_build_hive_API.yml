@@ -38,7 +38,7 @@ jobs:
         id: version_changed 
         run: |
           PAYLOAD=${{ steps.get_payload.outputs.PAYLOAD }}
-          CURRENT_TAG=${{steps.get_current_tag.outputs.VERSION}}
+          CURRENT_TAG=${{steps.get_current_tag.outputs.TAG}}
           CURRENT_VERSION=${{ steps.get_version.outputs.VERSION }}
 
           if [ "$PAYLOAD" != "$CURRENT_TAG" ]; then
