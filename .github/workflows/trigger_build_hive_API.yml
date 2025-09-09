@@ -80,12 +80,12 @@ jobs:
           TAG_NAME=${{ github.event.client_payload.tag }}
           echo "tag version: '$TAG_NAME'"
           ls -l version.txt
-          echo "version = 'A.B.C'" > version.txt
+          echo "version = 'C.B.A'" > version.txt
           cat version.txt
           git add version.txt
 
-          git config --global user.email "lorenzo.mazzi@vargroup.com"
-          git config --global user.name "lorenzomazzi-vargroup"
+          git config user.email "github-actions@github.com"
+          git config user.name "github-actions"
           git commit -m "Update version.txt"
           git push
           
@@ -100,8 +100,10 @@ jobs:
           echo "version = '$TAG_NAME'" > hive/version.py
           cat hive/version.py
 
-          git config --global user.email "lorenzo.mazzi@vargroup.com"
-          git config --global user.name "lorenzomazzi-vargroup"
+          git config user.email "github-actions@github.com"
+          git config user.name "github-actions"
+
+          git add hive/version.py
           git commit -m "Update hive/version.py"
           git push
 
