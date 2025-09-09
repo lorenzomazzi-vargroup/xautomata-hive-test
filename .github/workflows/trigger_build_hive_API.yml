@@ -50,7 +50,7 @@ jobs:
           if [ "$PAYLOAD" != "$CURRENT_TAG" ]; then
             echo "TAG has changed. New tag is $PAYLOAD"
             echo "TAG_CHANGED=true" >> $GITHUB_OUTPUT
-            echo "CURRENT_TAG = $PAYLOAD"
+            CURRENT_TAG = $PAYLOAD
           else
             echo "TAG has not changed."
             echo "TAG_CHANGED=false" >> $GITHUB_OUTPUT
