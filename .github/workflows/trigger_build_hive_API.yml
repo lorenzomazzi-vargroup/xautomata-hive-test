@@ -80,7 +80,7 @@ jobs:
           TAG_NAME=${{ github.event.client_payload.tag }}
           echo "tag version: '$TAG_NAME'"
           ls -l version.txt
-          echo 'version = 'A.B.C' > version.txt
+          echo "version = 'A.B.C'" > version.txt
   #scriviamo la nuova versione nel file
       - name: Update file version
         id: update_file_version
