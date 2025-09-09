@@ -83,6 +83,9 @@ jobs:
           echo "version = 'A.B.C'" > version.txt
           cat version.txt
           git add version.txt
+
+          git config --global user.email "lorenzo.mazzi@vargroup.com"
+          git config --global user.name "lorenzomazzi-vargroup"
           git commit -m "Update version.txt"
           git push
           
@@ -96,6 +99,9 @@ jobs:
           ls -l hive/version.py
           echo "version = '$TAG_NAME'" > hive/version.py
           cat hive/version.py
+
+          git config --global user.email "lorenzo.mazzi@vargroup.com"
+          git config --global user.name "lorenzomazzi-vargroup"
           git commit -m "Update hive/version.py"
           git push
 
