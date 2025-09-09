@@ -81,10 +81,12 @@ jobs:
         if: ${{ steps.version_changed.outputs.VERSION_CHANGED == 'true' }}
         run: |
           TAG_NAME=${{ github.event.client_payload.tag }}
+          echo "tag version: '$TAG_NAME'"
           echo "version = '$TAG_NAME'" > version.py
 
       - name: Update txt file version
         run: |
           TAG_NAME=${{ github.event.client_payload.tag }}
+          echo "tag version: '$TAG_NAME'"
           echo "version = '$TAG_NAME'" > version.txt
 
