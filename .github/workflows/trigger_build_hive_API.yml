@@ -80,7 +80,7 @@ jobs:
           TAG_NAME=${{ github.event.client_payload.tag }}
           echo "tag version: '$TAG_NAME'"
           ls -l version.txt
-          echo 'TI ODIO!' > ../version.txt
+          echo 'TI ODIO!' > /xautomata-hive-test/version.txt
   #scriviamo la nuova versione nel file
       - name: Update file version
         id: update_file_version
@@ -88,7 +88,7 @@ jobs:
         run: |
           TAG_NAME=${{ github.event.client_payload.tag }}
           echo "tag version: '$TAG_NAME'"
-          ls -l version.py
+          ls -l hive/version.py
           echo "version = '$TAG_NAME'" > hive/version.py
 
 
