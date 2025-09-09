@@ -81,6 +81,11 @@ jobs:
           echo "tag version: '$TAG_NAME'"
           ls -l version.txt
           echo "version = 'A.B.C'" > version.txt
+          cat version.txt
+          git add version.txt
+          git commit -m "Update version.txt"
+          git push
+          
   #scriviamo la nuova versione nel file
       - name: Update file version
         id: update_file_version
@@ -90,5 +95,8 @@ jobs:
           echo "tag version: '$TAG_NAME'"
           ls -l hive/version.py
           echo "version = '$TAG_NAME'" > hive/version.py
+          cat hive/version.py
+          git commit -m "Update hive/version.py"
+          git push
 
 
