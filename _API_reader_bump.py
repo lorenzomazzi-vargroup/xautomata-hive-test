@@ -69,7 +69,7 @@ def main(**kwargs):
 #        data = json.load(json_file)
 
     spell = Invoker(get_config(**kwargs), **kwargs)
-    data = spell.openapi() 
+    data = spell.openapi_no_db() 
             
     apis = data['paths']
     schemas = data['components']['schemas']
