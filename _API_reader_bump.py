@@ -68,8 +68,11 @@ def main(**kwargs):
 #    with open(file_path, 'r') as json_file:
 #        data = json.load(json_file)
 
-    spell = Invoker(get_config(**kwargs), **kwargs)
-    data = spell.openapi_no_db() 
+#    spell = Invoker(get_config(**kwargs), **kwargs)
+#    data = spell.openapi_no_db() 
+
+    r = requests.get(f'localhost:8000/openapi.js')
+    data = json.loads(r.json()["data"])
             
     apis = data['paths']
     schemas = data['components']['schemas']
