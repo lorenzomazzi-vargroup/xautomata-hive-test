@@ -2,6 +2,8 @@ from utilities.args.parser import ArgumentParser
 from utilities.io.services_job_util import Invoker, get_config
 from _API_writers import generate_python_code, underscore_to_camelcase, lib_import_set
 from utilities.dictionary import DeepDict
+import requests
+import json
 
 
 FORCE_STATUS = [429, 500, 502, 503, 504]
