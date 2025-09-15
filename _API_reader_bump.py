@@ -73,7 +73,7 @@ def main(**kwargs):
 #    spell = Invoker(get_config(**kwargs), **kwargs)
 #    data = spell.openapi_no_db() 
 
-    r = requests.get(f'http://localhost:8000/openapi.js')
+    r = requests.get(f'localhost:8000/openapi.js')
     data = json.loads(r.json()["data"])
             
     apis = data['paths']
