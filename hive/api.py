@@ -89,6 +89,13 @@ class ApiManager:
         data = json.loads(response.content[15:].decode('utf-8'))
         return data
 
+
+    def openapi_no_db(self):
+        r = requests.get(f'{self.root}/openapi.js')
+        data = json.loads(r.json()["data"])
+
+        return data
+
     @refresh
     def execute(self, mode: Literal['GET', 'POST', 'DELETE', 'PUT'], path, headers: Dict = None, single_page: bool = False,
                 page_size: int = 5000, payload: Dict or List[dict] = None, warm_start: bool = False,
