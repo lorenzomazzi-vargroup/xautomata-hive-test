@@ -74,7 +74,7 @@ def main(**kwargs):
 #    data = spell.openapi_no_db() 
 
     r = requests.get(f'http://localhost:8000/openapi.json')
-    data = json.loads(r.json()['data'])
+    data = json.loads(r.json())
             
     apis = data['paths']
     schemas = data['components']['schemas']
