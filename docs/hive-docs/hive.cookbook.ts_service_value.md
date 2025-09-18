@@ -1,1 +1,0 @@
-::: hive.cookbook.ts_service_value

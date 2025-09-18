@@ -1,1 +1,0 @@
-::: hive.cookbook.qr_code

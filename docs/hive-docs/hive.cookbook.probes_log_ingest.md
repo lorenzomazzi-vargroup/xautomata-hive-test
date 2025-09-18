@@ -1,1 +1,0 @@
-::: hive.cookbook.probes_log_ingest

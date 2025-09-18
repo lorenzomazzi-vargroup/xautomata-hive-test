@@ -1,1 +1,0 @@
-::: hive.cookbook.firmware_updates

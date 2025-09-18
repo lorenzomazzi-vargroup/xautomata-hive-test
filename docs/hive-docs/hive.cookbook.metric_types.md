@@ -1,1 +1,0 @@
-::: hive.cookbook.metric_types

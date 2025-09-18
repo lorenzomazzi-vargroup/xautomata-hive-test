@@ -1,1 +1,0 @@
-::: hive.cookbook.notification_providers

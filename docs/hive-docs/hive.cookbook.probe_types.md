@@ -1,1 +1,0 @@
-::: hive.cookbook.probe_types

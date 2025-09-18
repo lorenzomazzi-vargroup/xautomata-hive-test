@@ -1,1 +1,0 @@
-::: hive.cookbook.acl_docs

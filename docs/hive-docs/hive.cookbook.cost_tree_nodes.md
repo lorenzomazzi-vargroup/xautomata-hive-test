@@ -1,1 +1,0 @@
-::: hive.cookbook.cost_tree_nodes

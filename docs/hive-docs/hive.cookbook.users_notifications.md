@@ -1,1 +1,0 @@
-::: hive.cookbook.users_notifications
